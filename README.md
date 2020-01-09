@@ -66,5 +66,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-# Giphy-API
+
 # Zip-City-Search-API
+Collaborators: Eva Yan, Max Zlotskiy
+Date: January 2020
+Goal: To learn how to use APIs and React.
+
