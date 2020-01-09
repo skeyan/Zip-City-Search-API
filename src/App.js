@@ -7,11 +7,11 @@ class App extends Component {
   render() {
     return (
       <div className = "App">
-        <div className = "App-header">
+        <div className = "App-zipheader">
           <h2>Zipcode Search</h2>
         </div>
         <CitiesByZipContainer></CitiesByZipContainer>
-        <div className = "App-header">
+        <div className = "App-cityheader">
           <h2>City Search</h2>
         </div>
         <ZipcodesByCityContainer></ZipcodesByCityContainer>
