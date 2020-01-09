@@ -49,27 +49,35 @@ class SearchComponent extends Component {
 	*/
 	componentWillUpdate(nextProps, nextState) {
 		if(nextState.newSearch === true) {
-			//replace with API call
-			var hardcoded = [{"RecordNumber":"240","Zipcode":"10016","ZipCodeType":"STANDARD","City":"NEW YORK","State":"NY","LocationType":"PRIMARY","Lat":"40.71","Long":"-73.99","Xaxis":"0.20","Yaxis":"-0.72","Zaxis":"0.65","WorldRegion":"NA","Country":"US","LocationText":"New York, NY","Location":"NA-US-NY-NEW YORK","Decommisioned":"false","TaxReturnsFiled":"31673","EstimatedPopulation":"40683","TotalWages":"1412438620","Notes":""},{"RecordNumber":"241","Zipcode":"10016","ZipCodeType":"STANDARD","City":"MANHATTAN","State":"NY","LocationType":"NOT ACCEPTABLE","Lat":"40.71","Long":"-73.99","Xaxis":"0.20","Yaxis":"-0.72","Zaxis":"0.65","WorldRegion":"NA","Country":"US","LocationText":"Manhattan, NY","Location":"NA-US-NY-MANHATTAN","Decommisioned":"false","TaxReturnsFiled":"31673","EstimatedPopulation":"40683","TotalWages":"1412438620","Notes":""},{"RecordNumber":"242","Zipcode":"10016","ZipCodeType":"STANDARD","City":"NYC","State":"NY","LocationType":"NOT ACCEPTABLE","Lat":"40.71","Long":"-73.99","Xaxis":"0.20","Yaxis":"-0.72","Zaxis":"0.65","WorldRegion":"NA","Country":"US","LocationText":"Nyc, NY","Location":"NA-US-NY-NYC","Decommisioned":"false","TaxReturnsFiled":"31673","EstimatedPopulation":"40683","TotalWages":"1412438620","Notes":""}];
-			//begin callback function
-			//this array will hold the data in a form used by cards
-			var data = [];
-			var k = hardcoded.length * Math.random();
-			console.log("Got " + k + " elements from API");
-			for(var i = 0; i < k; i++) {
-				data.push({
-					cityState: hardcoded[i].LocationText,
-					state: hardcoded[i].State,
-					coordinates: "(" + hardcoded[i].Lat + ", " + hardcoded[i].Long + ")",
-					population: hardcoded[i].EstimatedPopulation,
-					wages: hardcoded[i].TotalWages
-				});
-			}
-			//stop future updates to the state from calling the API unecessarily, until 
-			//the zipcode input changes and newSearch becomes true again
-			this.setState({newSearch: false});
-			//at the end of the callback, update the parent with this info
-			this.state.updateParent(data);
+			//initiate API call
+			window.fetch("http://ctp-zip-api.herokuapp.com/zip/" + nextState.zipcodeInput)
+			//once the data is received, convert to json
+			.then((response) => {
+				return response.json();
+			})
+			//once JSON has been parsed, begin processing the data
+			.then((json) => {
+				//this array will hold the data in a form used by cards
+				var data = [];
+				for(var i = 0; i < json.length; i++) {
+					data.push({
+						cityState: json[i].LocationText,
+						state: json[i].State,
+						coordinates: "(" + json[i].Lat + ", " + json[i].Long + ")",
+						population: json[i].EstimatedPopulation,
+						wages: json[i].TotalWages
+					});
+				}
+				//stop future updates to the state from calling the API unecessarily, until 
+				//the zipcode input changes and newSearch becomes true again
+				this.setState({newSearch: false});
+				//at the end of the callback, update the parent with this info
+				this.state.updateParent(data);
+			})
+			//just in case anything went wrong
+			.catch((error) => {
+				console.log("Error: ", error);
+			});
 		}
 	}
 
