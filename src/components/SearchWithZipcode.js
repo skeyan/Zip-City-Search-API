@@ -34,6 +34,10 @@ class SearchComponent extends Component {
 		}
 	}
 
+	componentWillUpdate(nextProps, nextState) {
+		getCitiesByZip(nextState.zipcodeInput);
+	}
+
 	handleInput = (event) => {
 		this.tempZipInput = event.target.value;
 		console.log(this.tempZipInput);
