@@ -1,6 +1,6 @@
 .zipContainer {
 	display: inline-block;
-	float: left;
+	//float: left;
 	border-style: solid;
 	border-color: #696969;
 	border-radius: 8px;

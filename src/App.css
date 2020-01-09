@@ -1,8 +1,16 @@
 .App {
   text-align: center;
 }
-.App-header {
-  background-color: #222;
+.App-zipheader {
+  background-color: #fab234;
+  color: white;
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 1rem;
+}
+
+.App-cityheader {
+  background-color: #34b7d1;
   color: white;
   font-size: 1.25rem;
   margin: 0;

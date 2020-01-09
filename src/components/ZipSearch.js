@@ -3,9 +3,10 @@ import './styles/ZipStyles.css';
 
 //Card Component that displays the information after pressing Submit and maing a request.
 //Currently, this is hardcoded placeholder information for New York City (this is the card that will show up no matter what is typed and submitted into the search bar)
-//The ZipCards component should be the parent component of future unique cards.
+//The CityCards component should be the parent component of future unique cards.
 class CityCard extends Component {
 	
+	//Could remove this with a function and get rid of the "this" because it's a presentational component
 	constructor(props) {
 		super(props);
 	}
@@ -20,10 +21,10 @@ class CityCard extends Component {
 
 				<div className="zipCardList">
 					<h2>{this.props.cityState}</h2>
-					<li><p><b>State: </b>{this.props.state}</p></li>
-					<li><p><b>Location: </b>{this.props.coordinates}</p></li>
-					<li><p><b>Population (estimated): </b>{this.props.population}</p></li>
-					<li><p><b>Total Wages: </b>{this.props.wages}</p></li>
+					<li><b>State: </b>{this.props.state}</li>
+					<li><b>Location: </b>{this.props.coordinates}</li>
+					<li><b>Population (estimated): </b>{this.props.population}</li>
+					<li><b>Total Wages: </b>{this.props.wages}</li>
 				</div>
 
 			</div>
