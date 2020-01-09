@@ -18,9 +18,11 @@ class CitiesByZipContainer extends Component {
 			<SearchComponent handleSearch={this.handleUpdate}></SearchComponent>
 			<div>
 				{this.state.cardData.map((value, index) => {
-					<ZipCards key={index} state={value.location} population={value.population} wages={value.wages} latitude={value.latitude} longitude={value.longitude}></ZipCards>
+					<CityCard key={index} cityState={value.location} state={value.state} population={value.population} wages={value.wages} latitude={value.latitude} longitude={value.longitude}></CityCard>
 				})}
 			</div>
 		);
 	}
 }
+
+export default CitiesByZipContainer;
