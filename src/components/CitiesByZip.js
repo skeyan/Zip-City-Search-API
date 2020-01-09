@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './styles/ZipStyles.css';
 import SearchComponent from './SearchWithZipcode.js';
 import CityCard from './ZipSearch.js';
+import ZipCard from './ZipCard.js';
 
 class CitiesByZipContainer extends Component {
 	constructor(props) {

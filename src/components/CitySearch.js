@@ -9,8 +9,8 @@ class CitySearch extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			/*stores zip code in the state when it is submitted by pressing enter */
-			zipcodeInput: "",	
+			/*stores city in the state when it is submitted by pressing enter */
+			cityInput: "",	
 			/*when this is true, the component fetches data from the API 
 			* and updates its parent. When this is false, any kind of state 
 			* update can happen without causing the lifecycle update */
@@ -21,7 +21,7 @@ class CitySearch extends Component {
 			* by this component. It will be passed an array of JSON objects. */
 			updateParent: this.props.updateParent
 		}
-		this.tempZipInput = "";
+		this.tempCityInput = "";
 	}
 
 	handleKeyPress = (event) => {
@@ -31,11 +31,11 @@ class CitySearch extends Component {
 
 			//Change zipcodeInput to reflect what was submitted upon "submitting" aka pressing enter
 			this.setState({
-				zipcodeInput: this.tempZipInput,
+				cityInput: this.tempCityInput,
 				newSearch: true
 			});
 			//Testing - needs work
-			console.log(this.state.zipcodeInput);
+			console.log(this.state.cityInput);
 		}
 	}
 
@@ -50,7 +50,9 @@ class CitySearch extends Component {
 	componentWillUpdate(nextProps, nextState) {
 		if(nextState.newSearch === true) {
 			//initiate API call
-			window.fetch("http://ctp-zip-api.herokuapp.com/zip/" + nextState.zipcodeInput)
+			var uppercaseCity = nextState.cityInput.toUpperCase();
+			console.log("http://ctp-zip-api.herokuapp.com/city/" + uppercaseCity);
+			window.fetch("http://ctp-zip-api.herokuapp.com/city/" + uppercaseCity)
 			//once the data is received, convert to json
 			.then((response) => {
 				return response.json();
@@ -61,15 +63,11 @@ class CitySearch extends Component {
 				var data = [];
 				for(var i = 0; i < json.length; i++) {
 					data.push({
-						cityState: json[i].LocationText,
-						state: json[i].State,
-						coordinates: "(" + json[i].Lat + ", " + json[i].Long + ")",
-						population: json[i].EstimatedPopulation,
-						wages: json[i].TotalWages
+						zipcode: json[i]
 					});
 				}
 				//stop future updates to the state from calling the API unecessarily, until 
-				//the zipcode input changes and newSearch becomes true again
+				//the city input changes and newSearch becomes true again
 				this.setState({newSearch: false});
 				//at the end of the callback, update the parent with this info
 				this.state.updateParent(data);
@@ -82,16 +80,16 @@ class CitySearch extends Component {
 	}
 
 	handleInput = (event) => {
-		this.tempZipInput = event.target.value;
-		console.log(this.tempZipInput);
+		this.tempCityInput = event.target.value;
+		console.log(this.tempCityInput);
 	}
 
 	render() {
 		return(
 
 			<div>
-				<h2><b>Enter Zip Code to search: </b></h2>
-				<input placeholder="zip code" type="text" name="zipcode" onKeyPress={this.handleKeyPress} onChange={this.handleInput}/>
+				<h2><b>Enter City Name to search: </b></h2>
+				<input placeholder="city name" type="text" name="cityname" onKeyPress={this.handleKeyPress} onChange={this.handleInput}/>
 			</div>
 		);
 	}
