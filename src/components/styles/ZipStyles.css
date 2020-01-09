@@ -1,0 +1,28 @@
+.zipContainer {
+	display: inline-block;
+	float: left;
+	border-style: solid;
+	border-color: #696969;
+	border-radius: 8px;
+	border-width: 1.2px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 8px;
+	margin-right: 8px;
+	box-shadow: 2px 2px 5px silver;
+}
+
+/*.zipCardHead {
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+	background: #dbdbdb;
+}*/
+
+.zipCardList {
+	display: inline-block;
+	text-align: left;
+	padding: 10px;
+	padding-top: 0px;
+	margin: 15px;
+}
