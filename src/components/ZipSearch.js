@@ -16,12 +16,12 @@ class CityCard extends Component {
 		return (
 
 			// <li key={zipcode.cityState}>
-			<div className="zipContainer" key={zipcode.cityState}>
+			<div className="zipContainer">
 
 				<div className="zipCardList">
 					<h2>{this.props.cityState}</h2>
 					<li><p><b>State: </b>{this.props.state}</p></li>
-					<li><p><b>Location: </b>{this.props.location}</p></li>
+					<li><p><b>Location: </b>{this.props.coordinates}</p></li>
 					<li><p><b>Population (estimated): </b>{this.props.population}</p></li>
 					<li><p><b>Total Wages: </b>{this.props.wages}</p></li>
 				</div>

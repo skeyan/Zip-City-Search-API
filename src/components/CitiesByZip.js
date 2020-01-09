@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './styles/ZipStyles.css';
+import SearchComponent from './SearchWithZipcode.js';
+import CityCard from './ZipSearch.js';
 
 class CitiesByZipContainer extends Component {
-	constructor() {
+	constructor(props) {
+		super(props);
 		this.state = {
 			cardData: []
 		}
@@ -15,11 +18,18 @@ class CitiesByZipContainer extends Component {
 
 	render() {
 		return (
-			<SearchComponent handleSearch={this.handleUpdate}></SearchComponent>
 			<div>
-				{this.state.cardData.map((value, index) => {
-					<CityCard key={index} cityState={value.location} state={value.state} population={value.population} wages={value.wages} latitude={value.latitude} longitude={value.longitude}></CityCard>
-				})}
+				<SearchComponent handleSearch={this.handleUpdate}></SearchComponent>
+				<div>
+					{this.state.cardData.map((value, index) => (
+						<CityCard key={index} 
+								cityState={value.cityState} 
+								state={value.state} 
+								population={value.population} 
+								wages={value.wages} 
+								coordinates={value.coordinates}></CityCard>
+					))}
+				</div>
 			</div>
 		);
 	}
